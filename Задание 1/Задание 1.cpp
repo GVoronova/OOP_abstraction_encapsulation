@@ -19,7 +19,7 @@ public:
 		this->apartment = apartment;
 	};
 
-	Address(void) {
+	Address() {
 		sity = "";
 		street = "";
 		house = 0;
@@ -31,6 +31,8 @@ public:
 		fullAdress = { sity + ", " + street + ", " + std::to_string(house) + ", " + std::to_string(apartment) };
 		return fullAdress;
 	}
+
+	
 };
 
 int main() {
@@ -53,8 +55,8 @@ int main() {
 	if (file_in.is_open() && file_out.is_open()) {
 		file_in >> count;
 		int const size = count;
-		Address* data = new Address [size];
 		std::string* array = new std::string[size];
+		file_out << size << std::endl;
 
 		for (int i = 0; i < size; ++i) {
 
@@ -68,21 +70,15 @@ int main() {
 			array[i] = data.get_fullAddress();
 		}
 
-		std::string* array2 = new std::string[size];
-
 		for (int i = 0; i < size; ++i) {
-
-			array2[i] = array[size - 1 - i];
-
-			file_out << array2[i] << '\n';
+			file_out << array[size - i - 1] << std::endl;
 		}
 
 		file_in.close();
 		file_out.close();
 
-		delete[] data;
+		
 		delete[] array;
-		delete[] array2;
 
 	}
 	else {
